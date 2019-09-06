@@ -1,4 +1,4 @@
-# mandelbulb
+# Mandelbulb
 If you are interested in Fractals, you've probably heard of the Mandelbulb, however there is little documentation on 
 the internet as to how to render it, even less so on how to do it in python. 
 
