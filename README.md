@@ -1,6 +1,9 @@
 # Mandelbulb
 If you are interested in Fractals, you've probably heard of the Mandelbulb, however there is little documentation on 
-the internet as to how to render it, even less so on how to do it in python. 
+the internet as to how to render it, even less so on how to do it in python.
+
+![Photo of Mandelbulb](/photo_exports/version_1.jpeg)
+
 
 This code is made to render the Mandelbulb 3D fractal in python 2.7.16 using pygame. The method used is called ray-tracing.
 Link to Mandelbulb [Wikipedia](https://en.wikipedia.org/wiki/Mandelbulb).
