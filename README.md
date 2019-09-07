@@ -31,5 +31,5 @@ y' = R<sup>8</sup>·sin(8t)·sin(8p)
 z' = R<sup>8</sup>·cos(8p)
 
 
-The Mandelbulb set is then defined as the set of points c in R^3 such that z' = z^8 + c
-converges (analogous to the definition of the Mandelbrot set in R^2).
+The Mandelbulb set is then defined as the set of points c in <b>R</b><sup>3</sup> such that z' = z<sup>8</sup> + c
+converges (analogous to the definition of the Mandelbrot set in <b>R</b><sup>2</sup>).
