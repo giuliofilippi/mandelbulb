@@ -15,20 +15,20 @@ is to write down the vector position in spherical polars, and then multiply each
 The formulas for coordinates as a function of spherical polar angles are as follows
 
 
-x = R sin(t)·cos(p)
+*x = R sin(t)·cos(p)*
 
-y = R sin(t)·sin(p)
+*y = R sin(t)·sin(p)*
     
-z = R cos(p)
+*z = R cos(p)*
 
 
 Then the 8th power of this point is
 
-x' = R<sup>8</sup>·sin(8t)·cos(8p)
+*x' = R<sup>8</sup>·sin(8t)·cos(8p)*
     
-y' = R<sup>8</sup>·sin(8t)·sin(8p)
+*y' = R<sup>8</sup>·sin(8t)·sin(8p)*
     
-z' = R<sup>8</sup>·cos(8p)
+*z' = R<sup>8</sup>·cos(8p)*
 
 
 The Mandelbulb set is then defined as the set of points c in <b>R</b><sup>3</sup> such that z' = z<sup>8</sup> + c
