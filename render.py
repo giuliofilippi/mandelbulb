@@ -18,28 +18,41 @@ import pygame, sys
 from pygame.locals import *
 import numpy as np
 import math
+import pickle
+import os
 
 
-# create the grid of 3D locations of contact points of rays
-# fired through each pixel
-start = time.time()
-print ('Creating Pixel Locations Grid ...')
-arr = createcontactpixelgrid()
-print ('Done creating grid')
-end = time.time()
-print (str((end-start)/60)+' minutes elapsed')
+if os.path.exists("pickles/contactpixelgrid.pkl")==False:
+
+    # create the grid of 3D locations of contact points of rays
+    # fired through each pixel
+    start = time.time()
+    print ('Creating Pixel Locations Grid ...')
+    arr = createcontactpixelgrid()
+    print ('Done creating grid')
+    end = time.time()
+    print (str((end-start)/60)+' minutes elapsed')
+
+
+    # export a pickle file for faster reference later
+    with open('pickles/contactpixelgrid.pkl','wb') as pickle_file:
+        pickle.dump(arr,pickle_file)
+
+else:
+    with open('pickles/contactpixelgrid.pkl','rb') as pickle_file:
+        arr = pickle.load(pickle_file)
+
 
 # Initiate a pygame screen
 pygame.init()
 screen = pygame.display.set_mode((800,800))
 pygame.display.set_caption('Mandelbulb Set')
-screen.fill((0,0,0))
+screen.fill((17,24,31))
 pygame.display.update()
 
 
-
+# Loop over each pixel and assign their colors
 for i in range(0,800):
-
     print (str(i)+'/'+str(800))
     for j in range(0,800):
         # each pixel should get the right color
@@ -47,11 +60,12 @@ for i in range(0,800):
         pygame.Surface.set_at(screen, (i,j), col)
 
 
+# Show display update
 pygame.display.update()
 
-print ('Saving Photo ...')
 
-import os
+# Save a photo of this Mandelbulb with new name
+print ('Saving Photo ...')
 
 i = 0
 while os.path.exists("photo_exports/capture_" + str(i) + ".jpeg"):
@@ -62,6 +76,7 @@ filename = "photo_exports/capture_" + str(i) + ".jpeg"
 pygame.image.save(screen, filename)
 
 print ('DONE')
+
 
 # Endless loop awaiting QUIT
 while True:

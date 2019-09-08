@@ -21,6 +21,7 @@ blue = (0,0,255)
 green = (0,255,0)
 black = (0,0,0)
 white = (255,255,255)
+grey = (183,185,187)
 
 # camera and light positions in 3d space
 cam = np.array([1,1,-1.5])
@@ -129,17 +130,25 @@ def contactpixel(pixel):
     direction = normalise(s-cam)
     v = cam
 
-    # if want more precision must give it more time to get there 40->100
-    for i in range(100):
+    # if want more precision must give it more iterations to get there
+    for i in range(150):
 
-        change = DE(v,8)
+        # distance estimator
+        dist = DE(v,8)
+
+        # 0.0005 is precision
+        if dist<=0.0005:
+            return v
+
+        if dist>5:
+            return 'none'
+
+
 
         # 0.3 i added for safety because DE is an approximation
-        v = v + direction*change*0.3
+        v = v + direction*dist*0.3
 
-        # 0.005 is higher precision, used to be 0.01
-        if DE(v,8)<=0.005:
-            return v
+
 
     return 'none'
 
@@ -156,6 +165,14 @@ def createcontactpixelgrid():
             arr[i][j] = pos
 
     return arr
+
+
+def color_pixel(theta,color):
+    a = color[0]*theta
+    b = color[1]*theta
+    c = color[2]*theta
+
+    return (a,b,c)
 
 
 # get the pixel color from a grid of positions
@@ -177,7 +194,7 @@ def colorcontactgrid(pixel,arr):
     costheta = abs(np.dot(normal, lightdir))
 
     # color gradient of blue
-    return (0,0,int(254*costheta))
+    return color_pixel(costheta,grey)
 
 
 
