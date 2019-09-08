@@ -6,9 +6,14 @@
 # page : https://en.wikipedia.org/wiki/Mandelbulb
 
 
+# This file contains functions useful to draw the Mandelbulb
+# The drawing is done in render.py
+
+
 # imports
 import numpy as np
 import math
+import numpy as np
 
 # colors
 red = (255,0,0)
@@ -18,8 +23,28 @@ black = (0,0,0)
 white = (255,255,255)
 
 # camera and light positions in 3d space
-cam = np.array([0,0,-2])
+cam = np.array([1,1,-1.5])
 light = np.array([1,1,-1.5])
+
+
+# Get unit vectors spanning screen as function of camera position
+# there is some randomness to it
+zero = np.array([0,0,0])
+
+# normalise camera position
+ncam = cam/np.linalg.norm(cam)
+
+# get first unit vector
+unit_1 = np.random.randn(3)
+unit_1 -= unit_1.dot(ncam) * ncam
+unit_1 /= np.linalg.norm(unit_1)
+
+# get second unit vector
+unit_2 = np.cross(ncam, unit_1)
+
+
+# -----------------------------------------------------------------
+
 
 # Executes the Mandelbulb iteration operation
 # q is the power variable (8 is standard)
@@ -69,6 +94,24 @@ def location(pixel):
     return np.array([x,y,0])
 
 
+# Each pixel is given a location in 3d space
+# This is an altered version of the above function that allows for different
+# camera positions
+def location_ext(pixel):
+
+    # recenter at (400,400)
+    i = pixel[0]-400
+    j = pixel[1]-400
+
+    # set the delta
+    delta = 4./800
+
+    vec = delta*unit_1*i + delta*unit_2*j
+
+    return vec
+
+
+
 # Normalise a vector
 def normalise(vec):
     r = np.linalg.norm(vec)
@@ -82,48 +125,51 @@ def normalise(vec):
 # towards a pixel in the screen
 def contactpixel(pixel):
 
-	s = location(pixel)
-
-	direction = normalise(s-cam)
-
-	v = cam
-	x = 0
+    s = location_ext(pixel)
+    direction = normalise(s-cam)
+    v = cam
 
     # if want more precision must give it more time to get there 40->100
-	for i in range(100):
-		x+=1
+    for i in range(100):
 
-		change = DE(v,8)
+        change = DE(v,8)
 
-        # 0.3 i added for safety
-        # used to be 0.2, i think 0.3 is also okay
-		v = v + direction*change*0.3
-
+        # 0.3 i added for safety because DE is an approximation
+        v = v + direction*change*0.3
 
         # 0.005 is higher precision, used to be 0.01
-		if DE(v,8)<=0.005:
-			return v
+        if DE(v,8)<=0.005:
+            return v
 
-	return 'none'
+    return 'none'
+
+# create grid of contact locations
+def createcontactpixelgrid():
+
+    arr = np.empty(shape=(801,801),dtype=np.ndarray)
+
+    for i in range(0,801):
+        print (str(i)+'/'+str(800))
+        for j in range(0,801):
+            # each pixel should get it's position
+            pos = contactpixel((i,j))
+            arr[i][j] = pos
+
+    return arr
 
 
-# the color is determined by looking at the angle between the normal to the fractal
-# and the vector coming from the light
-def colorcontactpixel(pixel):
-    pixel_right = (pixel[0]+1,pixel[1])
-    pixel_left = (pixel[0]-1,pixel[1])
-    pixel_up = (pixel[0],pixel[1]+1)
-    pixel_down = (pixel[0],pixel[1]-1)
+# get the pixel color from a grid of positions
+def colorcontactgrid(pixel,arr):
+    i = pixel[0]
+    j = pixel[1]
 
-    s1 = contactpixel(pixel)
-    s2 = contactpixel(pixel_right)
-    s3 = contactpixel(pixel_up)
-
+    s1 = arr[i][j]
+    s2 = arr[i+1][j]
+    s3 = arr[i][j+1]
 
     # check if none of the pixels have diverged
     if s1=='none' or s2=='none' or s3=='none':
         return (0,0,0)
-
 
     normal = normalise(np.cross(s1-s2,s1-s3))
     lightdir = normalise(s1-light)
@@ -138,19 +184,7 @@ def colorcontactpixel(pixel):
 
 
 
-
-
-# colorcontactpixel can be made better by considering points in the set and points not in set to not fuclk off the border
 # right now very elementary
-# for higher resolutions can increase number of pixels or zoom in
-# This can also be made better by considering the fact that light intensity should depend on both angles to camera and light
-# Think of averaging the cross product?
-
-
-
-
-
-
-
+# Think of averaging the cross product
 # need to be aware that the fractal will be draw to the precision of the pixel grid no more, no less
 

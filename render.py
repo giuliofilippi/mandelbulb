@@ -6,6 +6,9 @@
 # page : https://en.wikipedia.org/wiki/Mandelbulb
 
 
+# This file executes the drawing of the Mandelbulb using pygame
+
+
 # imports
 import time
 from mandelbulb import *
@@ -16,6 +19,16 @@ from pygame.locals import *
 import numpy as np
 import math
 
+
+# create the grid of 3D locations of contact points of rays
+# fired through each pixel
+start = time.time()
+print ('Creating Pixel Locations Grid ...')
+arr = createcontactpixelgrid()
+print ('Done creating grid')
+end = time.time()
+print (str((end-start)/60)+' minutes elapsed')
+
 # Initiate a pygame screen
 pygame.init()
 screen = pygame.display.set_mode((800,800))
@@ -23,24 +36,30 @@ pygame.display.set_caption('Mandelbulb Set')
 screen.fill((0,0,0))
 pygame.display.update()
 
-# start time to count number of seconds to execute code
-start = time.time()
+
 
 for i in range(0,800):
-    end = time.time()
-    print (str(end-start)+' seconds elapsed')
+
     print (str(i)+'/'+str(800))
     for j in range(0,800):
         # each pixel should get the right color
-        col = colorcontactpixel((i,j))
+        col = colorcontactgrid((i,j),arr)
         pygame.Surface.set_at(screen, (i,j), col)
 
 
 pygame.display.update()
 
-print ('Saving Photo')
+print ('Saving Photo ...')
 
-pygame.image.save(screen, "photo_exports/capture.jpeg")
+import os
+
+i = 0
+while os.path.exists("photo_exports/capture_" + str(i) + ".jpeg"):
+    i += 1
+
+filename = "photo_exports/capture_" + str(i) + ".jpeg"
+
+pygame.image.save(screen, filename)
 
 print ('DONE')
 
