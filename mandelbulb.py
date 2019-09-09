@@ -166,7 +166,7 @@ def createcontactpixelgrid():
 
     return arr
 
-
+# color of pixel as function of theta (a ratio)
 def color_pixel(theta,color):
     a = color[0]*theta
     b = color[1]*theta
