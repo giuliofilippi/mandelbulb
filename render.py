@@ -22,6 +22,15 @@ import pickle
 import os
 
 
+# colors
+red = (255,0,0)
+blue = (0,0,255)
+green = (0,255,0)
+black = (0,0,0)
+white = (255,255,255)
+grey = (83,85,87)
+
+
 if os.path.exists("pickles/contactpixelgrid.pkl")==False:
 
     # create the grid of 3D locations of contact points of rays
@@ -47,7 +56,7 @@ else:
 pygame.init()
 screen = pygame.display.set_mode((800,800))
 pygame.display.set_caption('Mandelbulb Set')
-screen.fill((17,24,31))
+screen.fill(black)
 pygame.display.update()
 
 

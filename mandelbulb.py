@@ -21,7 +21,7 @@ blue = (0,0,255)
 green = (0,255,0)
 black = (0,0,0)
 white = (255,255,255)
-grey = (183,185,187)
+grey = (83,85,87)
 
 # camera and light positions in 3d space
 cam = np.array([1,1,-1.5])
@@ -186,7 +186,7 @@ def colorcontactgrid(pixel,arr):
 
     # check if none of the pixels have diverged
     if s1=='none' or s2=='none' or s3=='none':
-        return (0,0,0)
+        return black
 
     normal = normalise(np.cross(s1-s2,s1-s3))
     lightdir = normalise(s1-light)
@@ -194,6 +194,6 @@ def colorcontactgrid(pixel,arr):
     costheta = abs(np.dot(normal, lightdir))
 
     # color gradient of blue
-    return color_pixel(costheta,grey)
+    return color_pixel(costheta,white)
 
 
