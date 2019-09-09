@@ -197,11 +197,3 @@ def colorcontactgrid(pixel,arr):
     return color_pixel(costheta,grey)
 
 
-
-
-
-
-# right now very elementary
-# Think of averaging the cross product
-# need to be aware that the fractal will be draw to the precision of the pixel grid no more, no less
-
