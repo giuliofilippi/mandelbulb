@@ -19,3 +19,11 @@ The method used to draw the fractal is called ray tracing. Each pixel is given a
 
 To show depth, we use gradients of a color with the intensity being determined by how much light shines on that point. More specifically, the formula used to determine intensity of color is proportional to the cosine of the angle between the tangent to the fractal and the vector from the point light source to the fractal.
 
+
+
+
+
+More pictures :
+
+
+<img src="/photo_exports/capture_2.jpeg" width="500" height="500" />
