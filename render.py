@@ -22,7 +22,7 @@ import pickle
 import os
 
 
-if os.path.exists("pickles/contactpixelgrid3.pkl")==False:
+if os.path.exists("pickles/contactpixelgrid4.pkl")==False:
 
     # create the grid of 3D locations of contact points of rays
     # fired through each pixel
@@ -35,11 +35,11 @@ if os.path.exists("pickles/contactpixelgrid3.pkl")==False:
 
 
     # export a pickle file for faster reference later
-    with open('pickles/contactpixelgrid3.pkl','wb') as pickle_file:
+    with open('pickles/contactpixelgrid4.pkl','wb') as pickle_file:
         pickle.dump(arr,pickle_file)
 
 else:
-    with open('pickles/contactpixelgrid3.pkl','rb') as pickle_file:
+    with open('pickles/contactpixelgrid4.pkl','rb') as pickle_file:
         arr = pickle.load(pickle_file)
 
 

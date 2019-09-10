@@ -26,8 +26,8 @@ pink = (255,153,204)
 light_blue = (153,255,255)
 
 # camera and light positions in 3d space
-cam = np.array([-1,-1,-1])
-light = np.array([-1,-1,-1])
+cam = np.array([-0.6,-0.6,-0.6])
+light = np.array([-0.6,-0.6,-0.6])
 
 
 # Get unit vectors spanning screen as function of camera position
@@ -199,6 +199,6 @@ def colorcontactgrid(pixel,arr):
     costheta = abs(np.dot(normal, lightdir))
 
     # color gradient of whatever color is chosen
-    return color_pixel(costheta,pink)
+    return color_pixel(costheta,green)
 
 
