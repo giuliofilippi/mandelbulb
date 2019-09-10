@@ -22,6 +22,7 @@ green = (0,255,0)
 black = (0,0,0)
 white = (255,255,255)
 grey = (83,85,87)
+gold = (255,215,0)
 
 # camera and light positions in 3d space
 cam = np.array([1,1,-1.5])
@@ -194,6 +195,6 @@ def colorcontactgrid(pixel,arr):
     costheta = abs(np.dot(normal, lightdir))
 
     # color gradient of blue
-    return color_pixel(costheta,white)
+    return color_pixel(costheta,gold)
 
 
