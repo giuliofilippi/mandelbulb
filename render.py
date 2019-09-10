@@ -22,16 +22,7 @@ import pickle
 import os
 
 
-# colors
-red = (255,0,0)
-blue = (0,0,255)
-green = (0,255,0)
-black = (0,0,0)
-white = (255,255,255)
-grey = (83,85,87)
-
-
-if os.path.exists("pickles/contactpixelgrid.pkl")==False:
+if os.path.exists("pickles/contactpixelgrid2.pkl")==False:
 
     # create the grid of 3D locations of contact points of rays
     # fired through each pixel
@@ -44,11 +35,11 @@ if os.path.exists("pickles/contactpixelgrid.pkl")==False:
 
 
     # export a pickle file for faster reference later
-    with open('pickles/contactpixelgrid.pkl','wb') as pickle_file:
+    with open('pickles/contactpixelgrid2.pkl','wb') as pickle_file:
         pickle.dump(arr,pickle_file)
 
 else:
-    with open('pickles/contactpixelgrid.pkl','rb') as pickle_file:
+    with open('pickles/contactpixelgrid2.pkl','rb') as pickle_file:
         arr = pickle.load(pickle_file)
 
 
@@ -56,8 +47,6 @@ else:
 pygame.init()
 screen = pygame.display.set_mode((800,800))
 pygame.display.set_caption('Mandelbulb Set')
-screen.fill(black)
-pygame.display.update()
 
 
 # Loop over each pixel and assign their colors

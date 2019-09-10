@@ -25,8 +25,8 @@ grey = (83,85,87)
 gold = (255,215,0)
 
 # camera and light positions in 3d space
-cam = np.array([1,1,-1.5])
-light = np.array([1,1,-1.5])
+cam = np.array([1,1,-1])
+light = np.array([1,1,-1])
 
 
 # Get unit vectors spanning screen as function of camera position
@@ -127,29 +127,30 @@ def normalise(vec):
 # towards a pixel in the screen
 def contactpixel(pixel):
 
+    max_iter = 250
+    precision = 0.0001
+
     s = location_ext(pixel)
     direction = normalise(s-cam)
     v = cam
 
     # if want more precision must give it more iterations to get there
-    for i in range(150):
+    # max number of iterations base value : 150
+    for i in range(max_iter):
 
         # distance estimator
         dist = DE(v,8)
 
-        # 0.0005 is precision
-        if dist<=0.0005:
+        # 0.0005 is base value for precision
+        if dist<=precision:
             return v
 
         if dist>5:
             return 'none'
 
 
-
         # 0.3 i added for safety because DE is an approximation
         v = v + direction*dist*0.3
-
-
 
     return 'none'
 
