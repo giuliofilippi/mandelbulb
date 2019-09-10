@@ -42,6 +42,7 @@ To make the drawing process easier, we export pickle files containing numpy posi
 
 Some ideas for improving this code:
 
-Adding the possibility to have the light source and camera in different places without getting strange effects with the shading.
-
+* Adding the possibility to have the light source and camera in different places without getting strange effects with the shading.
+* Changing the texture of the mandelbulb like adding reflections, making it look metallic.
+* Using path tracing instead of ray tracing.
 
