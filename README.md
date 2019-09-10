@@ -21,7 +21,7 @@ To show depth, we use gradients of a color with the intensity being determined b
 
 The quality of the render can be chosen (depending on how long you are willing to wait) by changing the threshold distance and allowing it more iterations to get there if the threshold distance is very small. One can try out different camera positions, but the code does not allow at the moment that the camera and light source are in different positions.
 
-To make the drawing process easier, we export pickle files containing numpy position grids. When running the render.py file, if the necessary pickle file already exists it will skip the creation step making the drawing much quicker (20 seconds). If the pickle file does not exist, it will create it which could take up to 20 minutes if the chosen precision is very high.
+To make the drawing process easier, we export pickle files containing numpy position grids. When running the render.py file, if the necessary pickle file already exists it will skip the creation step making the drawing much quicker (20 seconds). If the pickle file does not exist, it will create it which could take up to 20 minutes if the chosen precision is very high. It is also worth noting that the presision of the drawing is ultimately capped by the size of the pixel grid. At the moment it is (800,800), this could be increased to render higher quality images.
 
 
 More pictures :
