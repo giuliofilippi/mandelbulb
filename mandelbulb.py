@@ -5,7 +5,6 @@
 # Details about how to calculate the set can be found on it's wikipedia
 # page : https://en.wikipedia.org/wiki/Mandelbulb
 
-
 # This file contains functions useful to draw the Mandelbulb
 # The drawing is done in render.py
 
@@ -23,10 +22,12 @@ black = (0,0,0)
 white = (255,255,255)
 grey = (83,85,87)
 gold = (255,215,0)
+pink = (255,153,204)
+light_blue = (153,255,255)
 
 # camera and light positions in 3d space
-cam = np.array([1,1,-1])
-light = np.array([1,1,-1])
+cam = np.array([-1,-1,-1])
+light = np.array([-1,-1,-1])
 
 
 # Get unit vectors spanning screen as function of camera position
@@ -36,7 +37,7 @@ zero = np.array([0,0,0])
 # normalise camera position
 ncam = cam/np.linalg.norm(cam)
 
-# get first unit vector
+# get first unit vector (some randomness here)
 unit_1 = np.random.randn(3)
 unit_1 -= unit_1.dot(ncam) * ncam
 unit_1 /= np.linalg.norm(unit_1)
@@ -67,7 +68,7 @@ def nextpoint(c,p,q):
 
 
 # This is the Distance Estimation function
-# It will estimate the distance from point c to the set
+# It will estimate the distance from point c to the M-set
 # Formula and how it works can be found on the internet
 def DE(c,q):
 	dr = 1.0
@@ -86,6 +87,7 @@ def DE(c,q):
 # Each pixel is given a location in 3d space
 # the screen is -2 to 2 on both x and y axis, 0 on z axis
 # The size of the screen is chosen to fit the mandelbulb
+# Old version of function (no longer used)
 def location(pixel):
     i = pixel[0]
     j = pixel[1]
@@ -99,6 +101,7 @@ def location(pixel):
 # Each pixel is given a location in 3d space
 # This is an altered version of the above function that allows for different
 # camera positions
+# New version of function (used)
 def location_ext(pixel):
 
     # recenter at (400,400)
@@ -111,7 +114,6 @@ def location_ext(pixel):
     vec = delta*unit_1*i + delta*unit_2*j
 
     return vec
-
 
 
 # Normalise a vector
@@ -127,7 +129,9 @@ def normalise(vec):
 # towards a pixel in the screen
 def contactpixel(pixel):
 
-    max_iter = 250
+    # max_iter base value : 150
+    # precision base value : 0.0005
+    max_iter = 1000
     precision = 0.0001
 
     s = location_ext(pixel)
@@ -135,22 +139,20 @@ def contactpixel(pixel):
     v = cam
 
     # if want more precision must give it more iterations to get there
-    # max number of iterations base value : 150
+
     for i in range(max_iter):
 
         # distance estimator
         dist = DE(v,8)
 
-        # 0.0005 is base value for precision
         if dist<=precision:
             return v
 
         if dist>5:
             return 'none'
 
-
-        # 0.3 i added for safety because DE is an approximation
-        v = v + direction*dist*0.3
+        # 0.4 i added for safety because DE is an approximation
+        v = v + direction*dist*0.4
 
     return 'none'
 
@@ -167,6 +169,7 @@ def createcontactpixelgrid():
             arr[i][j] = pos
 
     return arr
+
 
 # color of pixel as function of theta (a ratio)
 def color_pixel(theta,color):
@@ -195,7 +198,7 @@ def colorcontactgrid(pixel,arr):
 
     costheta = abs(np.dot(normal, lightdir))
 
-    # color gradient of blue
-    return color_pixel(costheta,gold)
+    # color gradient of whatever color is chosen
+    return color_pixel(costheta,pink)
 
 
