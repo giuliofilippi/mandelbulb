@@ -35,4 +35,14 @@ To make the drawing process easier, we export pickle files containing numpy posi
 
 
 <img src="/photo_exports/capture_11.jpeg" width="500" height="500" />
-<img src="/photo_exports/capture_12.jpeg" width="500" height="500" />
+<img src="/photo_exports/capture_14.jpeg" width="500" height="500" />
+
+
+## Potential Future Developments
+
+Some ideas for improving this code:
+
+* Adding the possibility to have the light source and camera in different places without getting strange effects with the shading.
+* Changing the texture of the mandelbulb like adding reflections, making it look metallic.
+* Using path tracing instead of ray tracing.
+
