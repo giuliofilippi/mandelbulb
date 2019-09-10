@@ -27,4 +27,4 @@ To make the drawing process easier, we export pickle files containing numpy posi
 More pictures :
 
 
-<img src="/photo_exports/capture_9.jpeg" width="500" height="500" />
+<img src="/photo_exports/capture_11.jpeg" width="500" height="500" />
