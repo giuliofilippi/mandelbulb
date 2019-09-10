@@ -2,7 +2,7 @@
 If you are interested in Fractals, you've probably heard of the Mandelbulb, however there is little documentation on 
 the internet as to how to render it in python.
 
-<img src="/photo_exports/capture_10.jpeg" width="500" height="500" />
+<img src="/photo_exports/capture_2.jpeg" width="500" height="500" />
 
 This repository is made to render the Mandelbulb 3D fractal using python 2.7.16 and pygame.
 Link to [Mandelbulb Wikipedia](https://en.wikipedia.org/wiki/Mandelbulb).
@@ -27,4 +27,4 @@ To make the drawing process easier, we export pickle files containing numpy posi
 More pictures :
 
 
-<img src="/photo_exports/capture_2.jpeg" width="500" height="500" />
+<img src="/photo_exports/capture_9.jpeg" width="500" height="500" />
