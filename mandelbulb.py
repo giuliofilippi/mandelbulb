@@ -26,8 +26,8 @@ pink = (255,153,204)
 light_blue = (153,255,255)
 
 # camera and light positions in 3d space
-cam = np.array([-0.6,-0.6,-0.6])
-light = np.array([-0.6,-0.6,-0.6])
+cam = np.array([0.8,0.8,0.8])
+light = np.array([0.8,0.8,0.8])
 
 
 # Get unit vectors spanning screen as function of camera position
@@ -131,8 +131,11 @@ def contactpixel(pixel):
 
     # max_iter base value : 150
     # precision base value : 0.0005
+
+    # the precision at the moment is set very high
+    # max_iter is also very high
     max_iter = 1000
-    precision = 0.0001
+    precision = 0.0000001
 
     s = location_ext(pixel)
     direction = normalise(s-cam)
@@ -141,6 +144,7 @@ def contactpixel(pixel):
     # if want more precision must give it more iterations to get there
 
     for i in range(max_iter):
+        # print i,DE(v,8)
 
         # distance estimator
         dist = DE(v,8)
@@ -199,6 +203,6 @@ def colorcontactgrid(pixel,arr):
     costheta = abs(np.dot(normal, lightdir))
 
     # color gradient of whatever color is chosen
-    return color_pixel(costheta,green)
+    return color_pixel(costheta,light_blue)
 
 
