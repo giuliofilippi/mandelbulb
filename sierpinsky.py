@@ -5,7 +5,7 @@ import random
 pygame.init()
 
 # Set the dimensions of the window
-width, height = 800, 800
+width, height = 299, 299
 window = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Sierpinski Triangle")
 
@@ -17,7 +17,7 @@ triangle_color = (0, 0, 0)
 point_color = (255, 0, 0)
 
 # Set the number of points to generate
-num_points = 50000
+num_points = 7000
 
 # Set the initial point inside the triangle
 point = [width / 2, height / 2]
@@ -35,7 +35,7 @@ for _ in range(num_points):
     pygame.display.update()
 
 # Draw the triangle
-pygame.draw.polygon(window, triangle_color, vertices, 1)
+pygame.image.save(window, "sierpinsky.png")
 
 # Main loop
 running = True
